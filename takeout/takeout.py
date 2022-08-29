@@ -48,7 +48,7 @@ class TakeoutClient:
 
         else:
             sendData = {
-                "token": auth_token,
+                # Removed token
                 "sender": sender,
                 "receiver": receiver,
                 "subject": subject,
@@ -67,7 +67,7 @@ class TakeoutClient:
             # if not bodyText and not bodyHTML:
                 # print("You've supplied no bodies, but Takeout will send it along anyways...")
 
-            sendAttempt = requests.post(send_url, json=sendData, headers={"Content-Type": "application/json"}, verify=True)
+            sendAttempt = requests.post(send_url, json=sendData, headers={"Content-Type": "application/json", "Authorization": f'Token {auth_token}'}, verify=True)
             sendJSON = sendAttempt.json()
 
             if sendAttempt.status_code == 200:
