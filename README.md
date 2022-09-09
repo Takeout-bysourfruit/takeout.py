@@ -85,7 +85,7 @@ emailTemplate = {
 }
 ```
 
-Furthermore, Takeout.js allows you to set a reply-to email. Define this in your template. 
+Furthermore, Takeout.py allows you to set a reply-to email. Define this in your template. 
 ```py
 emailTemplate = {
     'to': 'test@example.com',
