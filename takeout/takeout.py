@@ -6,7 +6,6 @@ auth_token = None
 send_url = "https://takeout.bysourfruit.com/api/email/send"
 auth_url = "https://takeout.bysourfruit.com/api/auth/verify"
 
-
 class TakeoutClient:
     @staticmethod
     def login(token):
@@ -35,13 +34,16 @@ class TakeoutClient:
     @staticmethod
     def send(**kwargs):
         if not authenticated:
-            exit("Takeout Send Error! You're not logged in! Run TakeoutClient.login(token).")
+            exit("Takeout Send Error! You're not logged in! Run TakeoutClient.login(token)")
 
         sender = kwargs.get("from").strip()
         receiver = kwargs.get("to").strip()
         subject = kwargs.get("subject").strip()
         bodyText = kwargs.get("text", "")
         bodyHTML = kwargs.get("html", "")
+        # Added in 1.2.2
+        cc = kwargs.get("cc", "")
+        replyTo = kwargs.get("replyTo", "")
 
         if not sender or not receiver or not subject:
             exit("Takeout Send Error! One of the required fields to send an email was not fulfilled. Check if your receiver, sender, and subject are defined.")
@@ -53,6 +55,7 @@ class TakeoutClient:
                 "receiver": receiver,
                 "subject": subject,
                 # No bodies, yet !
+                # No CC or reply-to !
             }
 
             if bodyText:
@@ -63,6 +66,12 @@ class TakeoutClient:
 
             if bodyHTML and bodyText:
                 sendData.update({"bodyHTML": bodyHTML})
+
+            if cc:
+                sendData.update({"cc": cc})
+
+            if replyTo:
+                sendData.update({"replyTo": replyTo})
 
             # if not bodyText and not bodyHTML:
                 # print("You've supplied no bodies, but Takeout will send it along anyways...")

@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '1.2.0'
+VERSION = '1.2.2'
 DESCRIPTION = 'A Takeout client for Python.'
 LONG_DESCRIPTION = "Takeout.py is an API wrapper for Takeout's API. See more information at https://github.com/Takeout-bysourfruit/takeout.py"
 
@@ -9,6 +9,7 @@ setup(
     version=VERSION,
     author="Takeout by Sourfruit",
     author_email="<hello@def-not-hacking-the.net>",
+    url="https://github.com/Takeout-bysourfruit/takeout.py",
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
