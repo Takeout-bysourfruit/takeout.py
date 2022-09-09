@@ -39,7 +39,7 @@ Define a 'template' similar to this:
 ```py
 emailTemplate = {
     'to': 'test@example.com',
-    'from': 'Takeout.py', # as of July 2022, this will be (e.g) 'Takeout.js via Takeout' for free users
+    'from': 'Takeout.py', # This will be (e.g) 'Takeout.py via Takeout' for free users
     'subject': 'I just sent an email using Takeout!',
     'html': "<b>My first email!</b>",
 }
@@ -48,7 +48,7 @@ or
 ```py
 emailTemplate = {
     'to': 'test@example.com',
-    'from': 'Takeout.py', # as of July 2022, this will be (e.g) 'Takeout.py via Takeout' for free users
+    'from': 'Takeout.py', # This will be (e.g) 'Takeout.py via Takeout' for free users
     'subject': 'I just sent an email using Takeout!',
     'text': 'My first email!',
 }
@@ -59,19 +59,44 @@ TakeoutClient.send(**emailTemplate)
 ```
 Note! Unlike Takeout.js, Takeout.py does not yet return an email ID.
 
-See? It's super simple. Oh, and you can also import HTML directly from a file, using getHTMLFileContents(). 
+See? It's super simple. Oh, and you can also import HTML directly from a file, using `getHTMLFileContents()`. 
 This is demonstrated here: 
 ```py
 file = TakeoutClient.getHTMLFileContents('test.html')
 emailTemplate = {
     'to': 'test@example.com',
-    'from': 'Takeout.py', # as of July 2022, this will be (e.g) 'Takeout.js via Takeout' for free users
+    'from': 'Takeout.py', # This will be (e.g) 'Takeout.py via Takeout' for free users
     'subject': 'I just sent an email using Takeout!',
     'html': file,
 }
 
 TakeoutClient.send(**emailTemplate)
 ```
+
+## Additional fields
+Takeout.py you to CC one person (a method to CC more is coming soon). Define this in your template. 
+```py
+emailTemplate = {
+    'to': 'test@example.com',
+    'from': 'Takeout.py', # This will be (e.g) 'Takeout.py via Takeout' for free users
+    'subject': 'I just sent an email using Takeout!',
+    'text': 'My first email!',
+    'cc': 'test@notexample.com'
+}
+```
+
+Furthermore, Takeout.js allows you to set a reply-to email. Define this in your template. 
+```py
+emailTemplate = {
+    'to': 'test@example.com',
+    'from': 'Takeout.py', # This will be (e.g) 'Takeout.py via Takeout' for free users
+    'subject': 'I just sent an email using Takeout!',
+    'text': 'My first email!',
+    'replyTo': 'reply@tome.com'
+}
+```
+
+
 ## Errors
 With the arrival of 1.2.0, came a new method to authenticate with Takeout's API. This removed your token from the request body and moved it to the Authorization header. If you're running an older version Takeout.py, Takeout will throw an error. Upgrade to a version >=1.2.0
 

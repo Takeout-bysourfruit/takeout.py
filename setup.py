@@ -16,3 +16,6 @@ setup(
     install_requires=['requests', 'certifi'],
     keywords=['python', 'takeout.py', 'takeout', 'sourfruit'],
 )
+
+# python setup.py sdist bdist_wheel
+# twine upload dist/*
