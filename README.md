@@ -59,10 +59,12 @@ TakeoutClient.send(**emailTemplate)
 ```
 Note! Unlike Takeout.js, Takeout.py does not yet return an email ID.
 
-See? It's super simple. Oh, and you can also import HTML directly from a file, using `getHTMLFileContents()`. 
-This is demonstrated here: 
+
+See? It's super simple. Oh, and you can also import HTML/text directly from a file, using `getLocalTemplate()` (prev. `getHTMLFileContents()`). This is demonstrated here:
+
 ```py
-file = TakeoutClient.getHTMLFileContents('test.html')
+file = TakeoutClient.getLocalTemplate('test.html')
+
 emailTemplate = {
     'to': 'test@example.com',
     'from': 'Takeout.py', # This will be (e.g) 'Takeout.py via Takeout' for free users
@@ -96,9 +98,25 @@ emailTemplate = {
 }
 ```
 
+## Takeout Cloud ☁️
+If you're a Takeout+ subscriber, you can upload email templates to Takeout Cloud via the [dashboard](https://takeout.bysourfruit.com/dashboard). You can upload up to 5 templates, each of which can be up to 5 megabytes in size.
+
+You can retrieve your template(s) using the package's built-in method, `getCloudTemplate()`. It'll only work after `TakeoutClient.login()`, and it expects the exact file name for your template.
+
+As an example, you'd use this code snippet of code to retrieve a template called `SomeRandomCloudTemplate.html`
+```py
+ template =  TakeoutClient.getCloudTemplate('SomeRandomCloudTemplate.html')
+```
+
+In the dashboard, after uploading the template, it'll look similar to this: 
+
+![](https://i.ibb.co/FzXgSRs/Screenshot-2022-10-09-at-3-37-33-pm.png)
 
 ## Errors
-With the arrival of 1.2.0, came a new method to authenticate with Takeout's API. This removed your token from the request body and moved it to the Authorization header. If you're running an older version Takeout.py, Takeout will throw an error. Upgrade to a version >=1.2.0
+With the arrival of 1.2.0, came a new method to authenticate with Takeout's API. This removed your token from the request body and moved it to the Authorization header. If you're running an older version Takeout.py, Takeout will throw an error. Upgrade to a version >=1.2.0.
+
+With the arrival of 1.3.0, `getHTMLFileContents()` was renamed to `getLocalTemplate()`. If you're running an older version Takeout.py, Takeout will throw an error. Upgrade to a version >=1.3.0.
+
 
 ## Roadmap 🚦
 - Some sort of templating built in, allowing you a greater variety of options in a single package (with... well some dependencies). 
