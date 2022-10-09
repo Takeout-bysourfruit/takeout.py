@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '1.2.2'
+VERSION = '1.3.1'
 DESCRIPTION = 'A Takeout client for Python.'
 LONG_DESCRIPTION = "Takeout.py is an API wrapper for Takeout's API. See more information at https://github.com/Takeout-bysourfruit/takeout.py"
 
@@ -17,5 +17,5 @@ setup(
     keywords=['python', 'takeout.py', 'takeout', 'sourfruit'],
 )
 
-# python setup.py sdist bdist_wheel
+# python3 setup.py sdist bdist_wheel
 # twine upload dist/*

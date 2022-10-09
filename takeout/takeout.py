@@ -90,7 +90,7 @@ class TakeoutClient:
 
 
     @staticmethod
-    def getHTMLFileContents(path):
+    def getLocalTemplate(path):
         try:
             file = open(path, mode='r')
             all_of_it = file.read()
@@ -98,3 +98,13 @@ class TakeoutClient:
             return all_of_it
         except IOError:
             exit("Takeout File Error! File doesn't seem to exist")
+
+
+    @staticmethod
+    def getCloudTemplate(name):
+        templateReq = requests.get(f'https://cdn-takeout.bysourfruit.com/cloud/read?name={name}&token={auth_token}', verify=True)
+
+        if templateReq.status_code == 400:
+            exit("Takeout didn't get a token, or you're not a Takeout+ subscriber")
+
+        return templateReq.text
